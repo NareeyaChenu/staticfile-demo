@@ -18,6 +18,8 @@ services:
       - "Kestrel__Endpoints__Http__Url=http://+:5000"
       - "Kestrel__Endpoints__Https__Url=https://+:5001"
       - "Kestrel__Certificates__Default__Path=./aspnetapp.pfx"
+      - "Static__Endpoints=${staticfile_sv_endpint}"
+      - "Static__Secret=${staticfile_sv_secret_key}"
       
     ports:
       - "5304:5000"

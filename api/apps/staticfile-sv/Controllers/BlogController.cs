@@ -22,9 +22,9 @@ public class BlogController : ControllerBase
 
   [HttpPost]
 
-  public ActionResult<Blog> CreateBlog(CreateBlog model)
+  public async Task<ActionResult<Blog>> CreateBlog(CreateBlog model)
   {
-    return _blogService.CreateBlog(model);
+    return await _blogService.CreateBlog(model);
   }
 
   [HttpGet]
