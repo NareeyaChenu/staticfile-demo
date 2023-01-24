@@ -2,22 +2,59 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
 	"name": "C# (.NET)",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/dotnet:0-6.0-bullseye",
+	// if using docker-compose.yml comment this
+	"dockerComposeFile": "./docker-compose.yml",
+	"service": "staticfile-demo-devcon",
+	// "workspaceMount": "/home/bangz/develop/wn/wn-eng/api/wn-eng-api",
+	"workspaceFolder": "/workspaces/staticfile-demo/api",
+	"shutdownAction": "stopCompose",
+	// "image": "mcr.microsoft.com/devcontainers/dotnet:0-6.0-bullseye",
 	"features": {
-		"ghcr.io/devcontainers/features/node:1": {}
-	}
+		"ghcr.io/devcontainers/features/node:1": {
+			"versions": "lts"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"humao.rest-client",
+				"cweijan.vscode-mysql-client2",
+				"davidanson.vscode-markdownlint",
+				"kreativ-software.csharpextensions",
+				"eamodio.gitlens",
+				"TabNine.tabnine-vscode",
+				"EthanSK.restore-terminals",
+				"k--kato.docomment",
+				"zxh404.vscode-proto3"
+			]
+		}
+	},
+	// dev-certs details:
+	// https://www.fearofoblivion.com/setting-up-asp-net-dev-certs-for-both-wsl-and-windows
+	// https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-6.0&tabs=visual-studio#ssl-linux
+	// 1. Export it locally using this command:
+	//    * Windows PowerShell:
+	//        dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+	//    * macOS/Linux terminal:
+	//        dotnet dev-certs https --trust; dotnet dev-certs https -ep "./local-cert/aspnetapp.pfx" -p "SecurePwdGoesHere"
+	// 	  - SecurePwdGoesHere=D112h49Seng@dev(secure password)
+	// 
+	// 2. Uncomment these 'remoteEnv' lines:
+	// if this don't work just manually export the env
+	// 	"remoteEnv": {
+	// 		"ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+	// 		"ASPNETCORE_Kestrel__Certificates__Default__Path": "../../local-cert/aspnetapp.pfx"
+	//    },
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
+	"mounts": [
+		"source=/usr/local/bin,target=/home/vscode/ngrok,type=bind,consistency=cached"
+	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
-	// "portsAttributes": {
-	//		"5001": {
-	//			"protocol": "https"
-	//		}
-	// }
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
