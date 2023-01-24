@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  staticfile-demo-devcon:
+    image: mcr.microsoft.com/devcontainers/dotnet:0-6.0-bullseye
+    container_name: staticfile-demo-devcon
+
+    volumes:
+      - ../..:/workspaces/staticfile-demo:cached
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    command: sleep infinity
+
+    networks:
+      - staticfile-demo-ssl-swarm-network
+
+networks:
+  staticfile-demo-ssl-swarm-network:
+    external: true
+    name: staticfile-demo-ssl-swarm-network

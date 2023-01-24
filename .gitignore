@@ -1,0 +1,5 @@
+**.env
+*.swp
+docker-compose.local.yml
+__pycache__
+# docker-compose.swarm.yml
