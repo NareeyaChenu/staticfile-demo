@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  staticfile-demo-mongo-express:
+    image: mongo-express
+    container_name: staticfile-demo-mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_URL=mongodb://root:password@staticfile-demo-mongodb:27017/?authSource=admin
+      - ME_CONFIG_BASICAUTH_USERNAME=staticfile_demo_admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=staticfile_demo_admin
+    restart: always
+    ports:
+      - "8081:8081"
+    networks:
+      - staticfile-demo-ssl-swarm-network
+
+networks:
+  staticfile-demo-ssl-swarm-network:
+    name: staticfile-demo-ssl-swarm-network
+    external: true

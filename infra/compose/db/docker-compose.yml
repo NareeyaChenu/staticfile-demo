@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  staticfile-demo-mongodb:
+    image: mongo
+    container_name: staticfile-demo-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+    networks:
+      - staticfile-demo-ssl-swarm-network
+
+networks:
+  staticfile-demo-ssl-swarm-network:
+    name: staticfile-demo-ssl-swarm-network
+    external: true
