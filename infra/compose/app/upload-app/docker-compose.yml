@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  upload-img-app:
+    image: kimmydev/upload-img-app:${upload_img_app_version}
+    build: 
+      context: ../../../../app/upload-img
+      dockerfile: Dockerfile
+    container_name: upload-img-app
+
+    ports:
+      - "3001:80"
+
+    environment:
+      # for app that expose the port other than 80
+      # don't use this if not sure it will throw 500/502
+      # it is used for proxy server
+      # - "VIRTUAL_PORT=${eng_app_virtual_port}" 
+      - "TZ=Asia/Bangkok"
+      - "VIRTUAL_HOST=${api_demo_host}"
+
+    restart: unless-stopped
+
+    networks:
+      - staticfile-demo-ssl-swarm-network
+
+
+# external network need to be create manually
+networks: 
+  staticfile-demo-ssl-swarm-network:
+    external: true
+    name: staticfile-demo-ssl-swarm-network

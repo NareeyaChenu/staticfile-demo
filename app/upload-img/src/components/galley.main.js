@@ -39,8 +39,7 @@ function GalleryMain() {
         };
 
         axios.get(
-            '',
-            params
+            'https://localhost:5404/api/v1/blog'
         )
             .then(res => {
                 if (res.status === 200) {
@@ -110,15 +109,15 @@ function GalleryMain() {
                                         }}
                                         component="img"
                                         height="250"
-                                        image={blog.file_data}
+                                        image={blog.ImageUrl}
                                         alt='image not found!'
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
-                                            {blog.title}
+                                            {blog.Tiltle}
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            {blog.description}
+                                            {blog.Description}
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>

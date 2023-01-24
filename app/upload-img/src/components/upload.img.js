@@ -56,14 +56,14 @@ export default function UploadImg() {
 
     const handleCreateBlog = (e) => {
         const body = {
-            title: state.img_title,
-            description: state?.img_description,
-            file_data: state?.files[0]?.base64,
-            file_type: state?.files[0]?.type,
+            Title: state.img_title,
+            Description: state?.img_description,
+            FileData: state?.files[0]?.base64,
+            FileType: state?.files[0]?.type,
         };
         console.log(body);
         axios.post(
-            '',
+            'https://localhost:5404/api/v1/blog',
             body
         )
             .then(res => {
@@ -185,7 +185,7 @@ export default function UploadImg() {
                                                 }}
                                                 component="img"
                                                 height="250"
-                                                image={file.base64}
+                                                image={"data:"+file.type+";base64,"+file.base64}
                                                 alt='image not found!'
                                             />
                                             <CardContent>
@@ -244,7 +244,7 @@ const FileBase64 = (props) => {
                     name: file.name,
                     type: file.type,
                     size: Math.round(file.size / 1000) + ' kB',
-                    base64: reader.result,
+                    base64: reader.result.replace("data:"+file.type+";base64,", ''),
                     file: file,
                 };
 
