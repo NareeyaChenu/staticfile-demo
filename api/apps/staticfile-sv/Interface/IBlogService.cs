@@ -6,7 +6,7 @@ namespace staticfile_sv.Interface
 {
     public interface IBlogService
     {
-       ActionResult<Blog> CreateBlog (CreateBlog model);
+       Task<ActionResult<Blog>> CreateBlog (CreateBlog model);
        ActionResult<IEnumerable<Blog>> GetBlogs ();
     }
 }
