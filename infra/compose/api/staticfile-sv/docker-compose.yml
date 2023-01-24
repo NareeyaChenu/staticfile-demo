@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # setup nginx for reverse proxying
+  staticfile-sv-demo:
+    image: winonafeminine/staticfile-sv-demo:${staticfile_sv_img_version}
+    build: 
+      context: ../../../../api
+      dockerfile: apps/staticfile-sv/Dockerfile
+    container_name: staticfile-sv-demo
+    restart: unless-stopped
+
+    networks:
+      - staticfile-demo-ssl-swarm-network
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
+
+      - "Kestrel__Endpoints__Http__Url=http://+:5000"
+      - "Kestrel__Endpoints__Https__Url=https://+:5001"
+      - "Kestrel__Certificates__Default__Path=./aspnetapp.pfx"
+      
+    ports:
+      - "5304:5000"
+      - "5404:5001"
+
+networks: 
+  staticfile-demo-ssl-swarm-network:
+    external: true
+    name: staticfile-demo-ssl-swarm-network
