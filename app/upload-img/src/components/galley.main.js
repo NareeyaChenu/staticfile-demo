@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -20,8 +20,8 @@ const initialState = {
 function GalleryMain() {
     const [state, setState] = useState(initialState);
 
-    const params = useParams();
-    const id = params.id;
+    // const params = useParams();
+    // const id = params.id;
 
 
     const setBlogs = useCallback(callback => {
@@ -71,6 +71,7 @@ function GalleryMain() {
 
         initBlos();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <>
