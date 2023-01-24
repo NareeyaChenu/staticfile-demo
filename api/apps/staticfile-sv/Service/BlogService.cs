@@ -14,7 +14,6 @@ namespace staticfile_sv.Service
     private readonly IMongoCollection<Blog> _blogCollection ;
      public BlogService(IOptions<DatabaseSetting> dbSetting)
      {
-      Console.WriteLine(JsonConvert.SerializeObject(dbSetting));
        var mongoClient = new MongoClient
        (dbSetting.Value.ConnectionString);
 

@@ -28,7 +28,16 @@ builder.Services.AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
                     = new DefaultContractResolver()
 );
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy(name: configuration["CorsName"], build =>
+  {
+    build.WithOrigins(configuration["AllowedHosts"])
+        .AllowAnyHeader()
+        .AllowAnyMethod();
 
+  });
+});
 
 builder.Services.AddScoped<IBlogService, BlogService>();
 
@@ -44,7 +53,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API V1");
       });
 }
-
+app.UseCors(configuration["CorsName"]);
 // app.UseHttpsRedirection();
 
 app.UseAuthorization();
